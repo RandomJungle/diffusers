@@ -865,5 +865,60 @@ def main(args):
 
 
 if __name__ == "__main__":
-    args = parse_args()
+
+    model_name = "runwayml/stable-diffusion-v1-5"
+    instance_dir = "/home/juliette/Pictures/dreambooth/instance_images"
+    class_dir = "/home/juliette/Pictures/dreambooth/class_images"
+    output_dir = "/home/juliette/Pictures/dreambooth/output"
+    concepts_list = "/home/juliette/Pictures/dreambooth/concepts_list.json"
+
+    args = argparse.Namespace(
+        pretrained_model_name_or_path=model_name,
+        pretrained_vae_name_or_path="stabilityai/sd-vae-ft-mse",
+        output_dir=output_dir,
+        revision="fp16",
+        with_prior_preservation=True,
+        prior_loss_weight=1.0,
+        seed=112358,
+        resolution=512,
+        center_crop=True,
+        train_batch_size=1,
+        train_text_encoder=True,
+        mixed_precision="fp16",
+        use_8bit_adam=False,
+        gradient_accumulation_steps=1,
+        learning_rate=1e-6,
+        lr_scheduler="constant",
+        lr_warmup_steps=0,
+        num_class_images=7,
+        sample_batch_size=4,
+        max_train_steps=1000,
+        save_interval=1000,
+        save_sample_prompt="guamis style, a monster with the face of a bull",
+        concepts_list=concepts_list,
+        logging_dir="/home/juliette/Pictures/dreambooth",
+        save_infer_steps=20,
+        tokenizer_name=None,
+        gradient_checkpointing=True,
+        instance_data_dir=instance_dir,
+        class_data_dir=class_dir,
+        instance_prompt="guamis style",
+        class_prompt="artwork style",
+        save_sample_negative_prompt="",
+        n_save_sample=2,
+        save_guidance_scale=8,
+        pad_tokens=False,
+        scale_lr=False,
+        adam_beta1=0.9,
+        adam_beta2=0.999,
+        adam_weight_decay=1e-2,
+        adam_epsilon=1e-08,
+        hub_model_id=None,
+        save_min_steps=10,
+        not_cache_latents=True,
+        hflip=True,
+        local_rank=-1,
+        read_prompts_from_txts=False
+    )
+
     main(args)
